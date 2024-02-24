@@ -1,0 +1,49 @@
+# Functions should return 1 if:
+# If we are pulling from stack value which is not found. 
+# Functions should return 2 if:
+""" There is a special token for function, which is not expected. """
+
+""" TEST 1 - indent, dedent """					
+s1 = 'Some text, so you have something to do with your life.'
+s2 = 'Thank you, sir.'
+if s1 != s2:
+	s3 = 'String 1 is not the same as string 2.'
+    else:
+	s3 = 'String 1 is the same as string 2.'
+
+""" TEST 2 - indent, dedent """"
+a = 5
+	if a != 0:
+	print('The number is not 0	!	'	)		""" Comment """
+else:
+	print(	'	The number is 0!)
+
+""" TEST 3 - multiline print """
+
+print("""
+Multiline print line
+""")
+
+""" TEST 4 - multiline comment """
+"""
+Multiline comment
+"""
+
+
+""" TEST 5 - indent, dedent"""
+
+	f = 1.5
+    a = 1
+c = ''
+
+""" TEST 6 """
+"""
+The start of multiple line comment
+Second line # Documentation string, in the function of multiple line comment, is only possible to put within separated line
+"""	# At the end of the multipleline comment, there can be only white spaces and indentation
+
+
+	
+
+
+

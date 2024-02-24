@@ -1,0 +1,35 @@
+
+b = 3
+
+c = 2
+
+print(None)
+
+a = len('string')
+print(a)
+
+print('substr')
+sadnk = 'Ahoj dlouhy str'
+a = substr(sadnk,sadnk,10)
+print(a)
+
+print('ord')
+a = ord('ah\nj',2)
+print(a)
+
+print('chr')
+a = chr(92)
+print(a)
+
+
+#a = b + c
+
+"""
+if c > b:
+
+   print(c)
+
+else:
+
+ pass
+"""

@@ -1,0 +1,119 @@
+const char build_in[][3000] ={ "\nLABEL print\n\
+        JUMPIFNEQ writestr TF@%ARG0 nil@nil\n\
+        WRITE string@None\n\
+        JUMP afterstr\n\
+        LABEL writestr\n\
+        WRITE TF@%ARG0\n\
+        LABEL afterstr\n\
+        MOVE TF@%%assign% nil@nil\n\
+        RETURN\n",
+        "\nLABEL len\n\
+        DEFVAR TF@$type\n\
+        TYPE TF@$type TF@%ARG0\n\
+        JUMPIFNEQ $wrong_type0 TF@$type string@string\n\
+        STRLEN TF@%%assign% TF@%ARG0\n\
+        RETURN\n\
+        LABEL $wrong_type0\n\
+          EXIT int@4\n",
+        "\nLABEL ord\n\
+        PUSHFRAME\n\
+        DEFVAR LF@$type\n\
+        TYPE LF@$type LF@%ARG0\n\
+        JUMPIFNEQ $wrong_type1 LF@$type string@string\n\
+        TYPE LF@$type LF@%ARG1\n\
+        JUMPIFNEQ $wrong_type1 LF@$type string@int\n\
+        DEFVAR LF@$not_in_range\n\
+        LT LF@$not_in_range LF@%ARG1 int@0\n\
+        JUMPIFEQ $out_of_range2 LF@$not_in_range bool@true\n\
+        DEFVAR LF@$string_length\n\
+        CREATEFRAME\n\
+        DEFVAR TF@%%assign%\n\
+        DEFVAR TF@%ARG0 \n\
+        MOVE TF@%ARG0 LF@%ARG0\n\
+        CALL len\n\
+        MOVE LF@$string_length TF@%%assign%\n\
+        SUB LF@$string_length LF@$string_length int@1\n\
+        GT LF@$not_in_range LF@%ARG1 LF@$string_length\n\
+        JUMPIFEQ $out_of_range2 LF@$not_in_range bool@true\n\
+        STRI2INT LF@%%assign% LF@%ARG0 LF@%ARG1\n\
+        POPFRAME\n\
+        RETURN\n\
+        LABEL $out_of_range2\n\
+        MOVE LF@%%assign% nil@nil\n\
+        POPFRAME\n\
+        RETURN\n\
+        LABEL $wrong_type1\n\
+        POPFRAME\n\
+        EXIT int@4\n"
+,
+        "\nLABEL substr\n\
+        PUSHFRAME\n\
+        DEFVAR LF@$char\n\
+        DEFVAR LF@$index\n\
+        DEFVAR LF@$type\n\
+        DEFVAR LF@$end\n\
+        MOVE LF@$index LF@%ARG1\n\
+        MOVE LF@%%assign% string@\n\
+        TYPE LF@$type LF@%ARG0\n\
+        JUMPIFNEQ $wrong_type5 LF@$type string@string\n\
+        TYPE LF@$type LF@%ARG1\n\
+        JUMPIFNEQ $wrong_type5 LF@$type string@int\n\
+        TYPE LF@$type LF@%ARG2\n\
+        JUMPIFNEQ $wrong_type5 LF@$type string@int\n\
+        DEFVAR LF@$not_in_range\n\
+        LT LF@$not_in_range LF@%ARG1 int@0\n\
+        JUMPIFEQ $out_of_range3 LF@$not_in_range bool@true\n\
+        DEFVAR LF@$string_length\n\
+        CREATEFRAME\n\
+        DEFVAR TF@%%assign%\n\
+        DEFVAR TF@%ARG0\n\
+        MOVE TF@%ARG0 LF@%ARG0\n\
+        CALL len\n\
+        MOVE LF@$string_length TF@%%assign%\n\
+        GT LF@$not_in_range LF@%ARG1 LF@$string_length\n\
+        JUMPIFEQ $out_of_range3 LF@$not_in_range bool@true\n\
+        LT LF@$not_in_range LF@%ARG2 int@0\n\
+        JUMPIFEQ $out_of_range3 LF@$not_in_range bool@true\n\
+        SUB LF@$string_length LF@$string_length LF@%ARG1\n\
+        GT LF@$not_in_range LF@%ARG2 LF@$string_length\n\
+        ADD LF@$string_length LF@$string_length LF@%ARG1\n\
+        SUB LF@$string_length LF@$string_length int@1\n\
+        JUMPIFEQ $return_rest_of_s LF@$not_in_range bool@true\n\
+        LABEL $return\n\
+        GETCHAR LF@$char LF@%ARG0 LF@$index\n\
+        CONCAT LF@%%assign% LF@%%assign% LF@$char\n\
+        ADD LF@$index LF@$index int@1\n\
+        SUB LF@%ARG2 LF@%ARG2 int@1\n\
+        GT LF@$end LF@%ARG2 int@0\n\
+        JUMPIFEQ $return LF@$end bool@true\n\
+        POPFRAME\n\
+        RETURN\n\
+        LABEL $return_rest_of_s\n\
+        GETCHAR LF@$char LF@%ARG0 LF@$index\n\
+        CONCAT LF@%%assign% LF@%%assign% LF@$char\n\
+        ADD LF@$index LF@$index int@1\n\
+        GT LF@$end LF@$index LF@$string_length\n\
+        JUMPIFEQ $return_rest_of_s LF@$end bool@false\n\
+        POPFRAME\n\
+        RETURN\n\
+        LABEL $out_of_range3\n\
+          MOVE LF@%%assign% nil@nil\n\
+          POPFRAME\n\
+          RETURN\n\
+        LABEL $wrong_type5\n\
+          POPFRAME\n\
+          EXIT int@4\n",
+        "\nLABEL chr\n\
+        DEFVAR TF@$type\n\
+        TYPE TF@$type TF@%ARG0\n\
+        JUMPIFNEQ $error10 TF@$type string@int\n\
+        DEFVAR TF@$not_in_range\n\
+        LT TF@$not_in_range TF@%ARG0 int@0\n\
+        JUMPIFEQ $error10 TF@$not_in_range bool@true\n\
+        GT TF@$not_in_range TF@%ARG0 int@255\n\
+        JUMPIFEQ $error10 TF@$not_in_range bool@true\n\
+        INT2CHAR TF@%%assign% TF@%ARG0\n\
+        RETURN\n\
+        LABEL $error10\n\
+        EXIT int@4\n"
+};

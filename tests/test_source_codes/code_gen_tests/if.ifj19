@@ -1,0 +1,5 @@
+i = 10
+if 1:
+   print(i)
+else:
+     print('skoda bro')

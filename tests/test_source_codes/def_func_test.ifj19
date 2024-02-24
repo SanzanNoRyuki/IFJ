@@ -1,0 +1,54 @@
+# Testing the definining of functions
+# author: Daniel Andrasko <xandra05>
+# date: 21.11.2019
+
+
+""" Every function has to be defined before its called. """"
+""" If the function is called from the main body code, the function has to be firstly defined. """
+""" The function does not need to be defined before its called, if we are calling the function """
+""" from a different function, which is called after both functions were defined. """
+
+""" TEST 1 - calling undefined function """
+f()
+
+""" TEST 2 -  calling function before its defined"""
+g()
+
+def g():
+	print('Function')
+
+""" TEST 3 - calling function 'i' from function 'h' before it was defined """
+# defining function h
+def h():
+	print('Function 2')
+	# calling function i
+	i() 
+
+# calling function h
+h()
+
+# defining function i, which is defined after the call of function h
+def i():
+	print('Function 1')
+
+""" TEST 4 - the amount of parameters when calling function != -||- when defining function """
+def j(a, b):
+	print a
+	print b
+a = 5
+b = 37
+
+j(a)
+
+""" TEST 5 - -||- """
+def k(c):
+	print c
+c = 6
+d = 7
+k(c, d)
+
+""" TEST 6 - redefining functions is not allowed """
+def l():
+	a = 5
+def l():
+	print('Redefined function.')

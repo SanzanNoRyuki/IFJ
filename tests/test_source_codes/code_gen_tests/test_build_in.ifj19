@@ -1,0 +1,50 @@
+""" Prosím neupravovat :D \""" """
+
+a = inputf()
+
+print(a)
+
+b = inputi()
+print(b)
+
+c = inputs()
+print(c)
+
+a = 10.5
+b = 'Ahoj'
+c = """ Multiline
+Ahoj
+
+"""
+d = 10
+
+print(a,b,c,d,13.2,15,'ahoj',"""AHOJ""")
+
+
+print("""Testing calling build-in functions""")
+print('\nsdadas = len(\'ahoj\')\n')
+sdadas = len('ahoj')
+print(sdadas)
+
+
+a = 2
+c = ord(b,a)
+print(c)  
+print('\nc = ord(\'ahoj\',2)\n')
+c = ord('ahoj',2)
+print(c)
+
+print('d = substr(b,a,a)')
+d = substr(b,a,a)
+print(d)
+d = substr('ahoj',2,3)
+print(d)
+
+i = 0
+i = chr(i)
+print(i)
+
+
+
+
+

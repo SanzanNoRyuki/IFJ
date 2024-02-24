@@ -1,0 +1,92 @@
+########################################
+##    Grammer for IFJ19 parser        ##
+##    Author: Vojtěch Ulej (xulejv00) ##
+########################################
+
+# Tokens: in file "scanner.h"
+## Start ##
+<input>      -> EOL <input>
+<input>      -> <stmts>  _EOF                  # stmts = statements
+## Statements ##
+<stmts>      -> <stmt> EOL <stmts>             # stmt = statement
+<stmt>       -> ID = <assign>                  # "=" = Token ASSIGN
+<stmt>       -> IF <expresion> : EOL INDENT <stmts> DEDENT ELSE : EOL
+                INDENT <stmts> DEDENT
+<stmt>       -> WHILE <expresion> : EOL INDENT <stmts> DEDENT
+<stmt>       -> <func_def>
+<stmt>       -> PASS
+<stmt>       -> <assign>
+<stmt>       -> RETURN <ret_val>
+
+<ret_val>    -> <term>
+<ret_val>    -> <expresion>
+
+<assign>     -> <expresion>
+<assign>     -> <term>
+<assign>     -> <call_func>
+
+<value>      -> INT | DOUBLE | STR | MULTILINE_STR | NONE
+<term>       -> ID | <value>
+
+## Functions ##
+<call_func>  -> ID(<args>                   # "(",")" = Token L_PAR,R_PAR
+<call_func>  -> inputs()
+<call_func>  -> inputi()
+<call_func>  -> inputf()
+<call_func>  -> len(STR|ID)
+<call_func>  -> substr(STR|ID,INT|ID,INT|ID)
+<call_func>  -> print(<args>
+
+<func_def>   -> DEF ID ( <args> : EOL INDENT <stmts> DEDENT
+                    # ":" = Token COLON
+<args>       -> )
+<args>       -> <arg>
+<arg>        -> <term> <next_arg>
+<next_arg>   -> , <term> <next_arg>
+<next_arg>   -> )
+
+
+
+
+
+## Format for web app: http://www.fit.vutbr.cz/~ikocman/llkptg/ ##
+
+%token WHILE IF ELSE NONE DEF PASS RETURN INDENT DEDENT _EOF EOL ID INT DOUBLE STR MULTILINE_STR
+%%
+input : EOL input
+      | stmts _EOF ;
+stmts : stmt EOL stmts;
+stmt  : ID "=" assign
+      | IF expresion ":" EOL INDENT stmts DEDENT ELSE ":" EOL INDENT stmts DEDENT
+      | WHILE expresion ":" EOL INDENT stmts DEDENT
+      | func_def
+      | PASS
+      | assign
+      | RETURN ret_val;
+ret_val : term
+        | expresion;
+assign : expresion
+       | term
+       | call_func;
+term   : ID
+       | value;
+value  : INT
+       | DOUBLE
+       | STR
+       | MULTILINE_STR
+       | NONE;
+call_func : ID "(" args
+          | "inputs" "(" ")"
+          | "inputi" "(" ")"
+          | "inputf" "(" ")"
+          | "len" "(" term ")"
+          | "substr" "(" term "," term "," term ")"
+          | "print" "(" args ;
+func_def  : DEF ID "(" args ":" EOL INDENT stmts DEDENT ;
+args      : ")"
+          | arg ;
+arg       : term next_arg ;
+next_arg  : "," term next_arg
+          | ")";
+expresion : ;
+

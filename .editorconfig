@@ -1,0 +1,27 @@
+# IFJ Compiler editor config
+
+root=true
+
+[*]
+trim_trailing_whitespace = true
+end_of_line = lf
+charset = utf-8
+
+# Nastavení odsazení pro C
+[*.{c,h}]
+indent_style = space
+indent_size = 2
+
+# Nastavení odsazení pro IFJcode19 (stejné jako python)
+[*.IFJcode19]
+insert_final_newline = true
+indent_style = space
+indent_size = 4
+
+# Nastavení odsazení pro makefile
+[Makefile]
+indent_style = tab
+
+# Nastavení pro MD file
+[*.md]
+insert_final_newline = false

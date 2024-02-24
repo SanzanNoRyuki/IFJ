@@ -1,0 +1,7 @@
+
+i=9
+
+if 10 + i:
+  print(i)
+else:
+     print('shiiit') 

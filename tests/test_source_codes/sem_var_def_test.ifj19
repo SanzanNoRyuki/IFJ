@@ -1,0 +1,53 @@
+# Testing the defining of variables in IFJ19
+# author: Daniel Andrasko <xandra05>
+# date: 21.11.2019
+
+
+""" There are 2 types of variables: """
+""" 1. Local - local variables and parameters can be used only in the function they are defined. """
+""" 2. Global - these can be used from the point they are defined till the end of the program. """
+
+""" ERRORS """
+""" Function should return 3 if there is a variable, which is not defined - semantic error. """
+""" Cant create new variable with the name, which is already taken by function. """
+""" Cant create new function with the name, which is already taken by variable. """
+
+""" DEFINITION - a variable is defined as the value is being assigned to it.  """
+
+
+""" TEST 1 - undefined variable - should return 3 """
+if a != 5:
+	print('The number is not 5!')
+
+""" TEST 2 - undefined variable in function - should return 3 """ 
+def f():  
+    print s   
+
+""" TEST 3 - undefined variable - should return 3 """
+b = 5
+b = c
+
+""" TEST 4 - defining variable with the same name as before defined function """ 
+def d():
+	s = 'Some text'  
+	print s  
+   
+d = 42.0
+
+""" TEST 5 - defining function with the same name as before defined variable """
+e = 42.0
+
+def e():
+	s = 'Some text'
+	print s
+
+""" TEST 6 - using variable, defined in function - local variable, out of function """
+def g():
+	h = 5
+
+if h != 5:
+	print('The is not 5!')
+
+
+
+

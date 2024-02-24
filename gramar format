@@ -1,0 +1,47 @@
+INPUT      -> STMTS  _eof
+
+STMTS      -> ε
+STMTS      -> STMT STMTS
+
+STMT       -> id = ASSIGN
+STMT       -> if EXPRESION : eol indent STMTS dedent else : eol indent STMTS dedent
+STMT       -> while EXPRESION : eol indent STMTS dedent
+STMT       -> FUNC_DEF eol
+STMT       -> pass eol
+STMT       -> eol
+STMT       -> CALL_FUNC eol
+STMT       -> return RET_VAL eol
+
+ASSIGN     -> EXPRESION
+ASSIGN     -> TERM eol
+ASSIGN     -> CALL_FUNC eol
+
+VALUE      -> int
+VALUE      -> double
+VALUE      -> str
+VALUE      -> multiline_str
+VALUE      -> none
+
+TERM       -> id
+TERM       -> VALUE
+
+CALL_FUNC  -> func_id ( ARGS
+CALL_FUNC  -> inputs ( )
+CALL_FUNC  -> inputi ( )
+CALL_FUNC  -> inputf ( )
+CALL_FUNC  -> len ( TERM )
+CALL_FUNC  -> substr ( TERM , TERM , TERM )
+CALL_FUNC  -> print ( ARGS
+CALL_FUNC  -> ord ( TERM )
+CALL_FUNC  -> chr ( TERM )
+
+
+FUNC_DEF   -> def func_id ( ARGS : eol indent STMTS dedent
+
+RET_VAL    -> TERM
+RET_VAL    -> EXPRESION
+
+ARGS       -> TERM NEXT_ARG
+
+NEXT_ARG   -> , TERM NEXT_ARG
+NEXT_ARG   -> )
